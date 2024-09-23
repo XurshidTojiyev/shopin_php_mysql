@@ -11,7 +11,21 @@
 
 	<?php
 
-		$datas = get_products();
+		if(isset($_POST['submit'])) {
+      $title = $_POST['title'];
+      $price = $_POST['price'];
+      $cdn = $_POST['cdn'];
+      $category = $_POST['category'];
+      $admin = $_POST['admin'];
+        if($title != "" && $price != "" && $cdn != "" && $category != "" && $admin != "") {
+          insert_data($title, $price, $cdn, $category, $admin);
+          header("Location: index.php");
+        } else {
+          ?> <script>
+            alert("Please Enter All Values !!")
+            </script> <?php
+        }
+    }
 
 	 ?>
 
@@ -94,56 +108,29 @@
   </div>
 </header>
 
-<main>
+<main class="container all mt-5" id="all">
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <?php foreach($datas as $data) : ?>
-        	<div class="col">
-          <div class="card shadow-sm">
-            <img class="bd-placeholder-img card-img-top" src="<?=$data['image_cdn'] ?>" width="100%" height="225">
-            <div class="card-body">
-			<b class="card-text" style="font-size: 30px;"><?=$data['title'];?></b>
-              <p class="card-text"><?=$data['price'];?>$</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        	<?php endforeach; ?>
-      </div>
-    </div>
-  </div>
+  <form action="" method="POST">
+    <h1>Add Fruit</h1>
+    <label for="">Title</label>
+    <input type="text" class="form-control" name="title"><br>
+    <label for="">Price</label>
+    <input type="number" class="form-control" name="price"><br>
+    <label for="">Image</label>
+    <textarea name="cdn" class="form-control"></textarea><br>
+    <label for="">Category</label>
+<select class="form-control" name="category" id="select">
+  <option value="fruit">Fruit</option>
+  <option value="phone">Phone</option>
+  <option value="computer">Computer</option>
+  <option value="accesories">Accesories</option>
+</select><br>
+    <label for="">Admin</label>
+    <input type="text" class="form-control" name="admin">
+    <button class="btn btn-primary mt-4" name="submit">Add</button>
+  </form>
 
 </main>
-
-<footer class="text-body-secondary py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
-  </div>
-</footer>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
    
 	
