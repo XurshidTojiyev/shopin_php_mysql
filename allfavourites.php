@@ -11,7 +11,7 @@
 
 	<?php
 
-		$datas = get_products();
+		$datas = get_fvs_data();
 
 	 ?>
 
